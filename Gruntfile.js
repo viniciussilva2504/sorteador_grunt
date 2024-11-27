@@ -20,6 +20,7 @@ module.exports = function (grunt) {
         },
 
         // Substituição no HTML
+
         replace: {
             dev: {
                 options: {
@@ -79,7 +80,6 @@ module.exports = function (grunt) {
                 },
             },
         },
-
         // Observação de mudanças nos arquivos
         watch: {
             less: {
