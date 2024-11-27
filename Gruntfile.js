@@ -2,9 +2,6 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
-        // Limpeza de diretórios desnecessários, como o node_modules
-        clean: ['prebuild', 'dist', 'node_modules'], 
-
         // Compilação LESS
         less: {
             development: {
@@ -29,11 +26,11 @@ module.exports = function (grunt) {
                     patterns: [
                         {
                             match: 'ENDERECO_DO_CSS',
-                            replacement: './styles/main.css',
+                            replacement: './styles/main.css',  // Corrigido para caminho relativo no ambiente Vercel
                         },
                         {
                             match: 'ENDERECO_DO_JS',
-                            replacement: '../src/scripts/main.js'
+                            replacement: './scripts/main.js',  // Corrigido para caminho relativo no ambiente Vercel
                         }
                     ],
                 },
@@ -51,11 +48,11 @@ module.exports = function (grunt) {
                     patterns: [
                         {
                             match: 'ENDERECO_DO_CSS',
-                            replacement: './styles/main.min.css',
+                            replacement: './styles/main.min.css',  // Corrigido para caminho relativo no ambiente Vercel
                         },
                         {
-                            match: 'ENDERECO_DO_CSS',
-                            replacement: './scripts/main.min.js',
+                            match: 'ENDERECO_DO_JS',
+                            replacement: './scripts/main.min.js',  // Corrigido para caminho relativo no ambiente Vercel
                         },
                     ],
                 },
@@ -95,11 +92,14 @@ module.exports = function (grunt) {
             },
         },
 
-        // Minificação de arquivos JS
+        // Limpeza da pasta prebuild
+        clean: ['prebuild'],
+
+        // Minificação do JS
         uglify: {
             target: {
                 files: {
-                    'dist/scripts/main.min.js': 'src/scripts/main.js'
+                    'dist/scripts/main.min.js': 'src/scripts/main.js',
                 }
             }
         }
@@ -115,5 +115,5 @@ module.exports = function (grunt) {
 
     // Tarefas
     grunt.registerTask('default', ['watch']); // Ambiente de desenvolvimento
-    grunt.registerTask('build', ['clean', 'less:production', 'htmlmin:dist', 'replace:dist', 'uglify']); // Produção
+    grunt.registerTask('build', ['less:production', 'htmlmin:dist', 'replace:dist', 'clean', 'uglify']); // Produção
 };
