@@ -14,7 +14,7 @@ module.exports = function (grunt) {
                     compress: true,
                 },
                 files: {
-                    'dist/styles/main.min.css': 'src/styles/main.less',
+                    'dist/styles/main.min.css': 'src/styles/main.less', // Produz o CSS minificado
                 },
             },
         },
@@ -26,11 +26,11 @@ module.exports = function (grunt) {
                     patterns: [
                         {
                             match: 'ENDERECO_DO_CSS',
-                            replacement: './styles/main.css',  // Corrigido para caminho relativo no ambiente Vercel
+                            replacement: './styles/main.css',
                         },
                         {
                             match: 'ENDERECO_DO_JS',
-                            replacement: './scripts/main.js',  // Corrigido para caminho relativo no ambiente Vercel
+                            replacement: '../src/scripts/main.js'
                         }
                     ],
                 },
@@ -48,11 +48,11 @@ module.exports = function (grunt) {
                     patterns: [
                         {
                             match: 'ENDERECO_DO_CSS',
-                            replacement: './styles/main.min.css',  // Corrigido para caminho relativo no ambiente Vercel
+                            replacement: './styles/main.min.css', // Usando o arquivo minificado
                         },
                         {
                             match: 'ENDERECO_DO_JS',
-                            replacement: './scripts/main.min.js',  // Corrigido para caminho relativo no ambiente Vercel
+                            replacement: './scripts/main.min.js',
                         },
                     ],
                 },
@@ -95,11 +95,11 @@ module.exports = function (grunt) {
         // Limpeza da pasta prebuild
         clean: ['prebuild'],
 
-        // Minificação do JS
+        // Minificação do JS para produção
         uglify: {
             target: {
                 files: {
-                    'dist/scripts/main.min.js': 'src/scripts/main.js',
+                    'dist/scripts/main.min.js': 'src/scripts/main.js'
                 }
             }
         }

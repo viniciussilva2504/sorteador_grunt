@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sorteador</title>
-    <link rel="stylesheet" href="@@ENDERECO_DO_CSS"> <!-- Alterado para o caminho correto -->
+    <!-- Link para as fontes externas (Google Fonts) -->
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Link para o arquivo CSS gerado pelo LESS -->
+    <link rel="stylesheet" href="./styles/main.min.css"> <!-- CSS gerado pelo LESS -->
 </head>
 <body>
-    <div id="app">
+    <main>
+        <h1>Sorteio Aleatório</h1>
         <form id="form-sorteador">
             <input type="number" id="numero-maximo" placeholder="Número máximo" min="1" max="99">
             <button type="submit">Sortear</button>
@@ -16,8 +20,9 @@
         <div class="resultado" style="display: none;">
             <p>O número sorteado é: <span id="resultado-valor"></span></p>
         </div>
-    </div>
+    </main>
 
-    <script src="./scripts/main.min.js"></script> <!-- Alterado para o caminho correto -->
+    <!-- Link para o arquivo JavaScript gerado -->
+    <script src="./scripts/main.min.js"></script> <!-- JS gerado pelo Grunt -->
 </body>
 </html>
