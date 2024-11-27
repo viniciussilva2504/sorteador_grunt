@@ -2,6 +2,9 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
+        // Limpeza de diretórios desnecessários, como o node_modules
+        clean: ['prebuild', 'dist', 'node_modules'], 
+
         // Compilação LESS
         less: {
             development: {
@@ -20,7 +23,6 @@ module.exports = function (grunt) {
         },
 
         // Substituição no HTML
-
         replace: {
             dev: {
                 options: {
@@ -80,6 +82,7 @@ module.exports = function (grunt) {
                 },
             },
         },
+
         // Observação de mudanças nos arquivos
         watch: {
             less: {
@@ -92,12 +95,11 @@ module.exports = function (grunt) {
             },
         },
 
-        // Limpeza da pasta prebuild
-        clean: ['prebuild'],
+        // Minificação de arquivos JS
         uglify: {
             target: {
                 files: {
-                    'dist/scrips/main.min.js': 'src/scripts/main.js'
+                    'dist/scripts/main.min.js': 'src/scripts/main.js'
                 }
             }
         }
@@ -113,5 +115,5 @@ module.exports = function (grunt) {
 
     // Tarefas
     grunt.registerTask('default', ['watch']); // Ambiente de desenvolvimento
-    grunt.registerTask('build', ['less:production', 'htmlmin:dist', 'replace:dist', 'clean', 'uglify']); // Produção
+    grunt.registerTask('build', ['clean', 'less:production', 'htmlmin:dist', 'replace:dist', 'uglify']); // Produção
 };
